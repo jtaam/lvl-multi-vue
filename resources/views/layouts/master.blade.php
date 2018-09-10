@@ -65,16 +65,16 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          
+
           <li class="nav-item">
             <router-link to="/dashboard" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt blue"></i>
               <p>
-                Dashboard                
+                Dashboard
               </p>
             </router-link>
-          </li>           
-          
+          </li>
+
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link active">
               <i class="nav-icon fa fa-cog green"></i>
@@ -85,17 +85,17 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link active">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Active Page</p>
-                </a>
+                <router-link to="/users" class="nav-link">
+                  <i class="fa fa-users nav-icon "></i>
+                  <p>Users</p>
+                </router-link>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Inactive Page</p>
                 </a>
-              </li>
+              </li> --}}
             </ul>
           </li>
 
@@ -107,7 +107,7 @@
                 Profile
               </p>
             </router-link>
-          </li>  
+          </li>
 
           <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}"
@@ -116,12 +116,12 @@
                             <i class="nav-icon fa fa-power-off red"></i>
                             <p>
                               {{ __('Logout') }}
-                            </p>              
+                            </p>
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
-            </form> 
-          </li> 
+            </form>
+          </li>
 
         </ul>
       </nav>

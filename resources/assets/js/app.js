@@ -10,6 +10,16 @@ require('./bootstrap');
 window.Vue = require('vue');
 // Moment js
 import moment from 'moment';
+// Sweet alert 2
+import swal from 'sweetalert2'
+window.swal = swal;
+const toast = swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000
+});
+window.toast = toast;
 // Vform
 import { Form, HasError, AlertError } from 'vform'
 window.Form = Form

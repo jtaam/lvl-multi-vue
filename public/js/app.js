@@ -51391,26 +51391,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }); // function({data})
     },
     createUser: function createUser() {
+      var _this2 = this;
+
       this.$Progress.start();
-      this.form.post('api/user');
-      // Fire
-      Fire.$emit('afterCreateUser');
 
-      $('#addNewUser').modal('hide');
+      this.form.post('api/user').then(function () {
+        // Fire
+        Fire.$emit('afterCreateUser');
 
-      toast({
-        type: 'success',
-        title: 'User created successfully'
-      });
-      this.$Progress.finish();
+        $('#addNewUser').modal('hide');
+
+        toast({
+          type: 'success',
+          title: 'User created successfully'
+        });
+        _this2.$Progress.finish();
+      }).catch(function () {});
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this3 = this;
 
     this.loadUsers();
     Fire.$on('afterCreateUser', function () {
-      _this2.loadUsers();
+      _this3.loadUsers();
     });
     // setInterval(()=>this.loadUsers(),3000);
   }

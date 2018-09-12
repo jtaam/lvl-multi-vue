@@ -14064,7 +14064,8 @@ Vue.filter('capText', function (value) {
 Vue.filter('userCreateDate', function (created) {
   return __WEBPACK_IMPORTED_MODULE_0_moment___default()(created).format('MMMM Do YYYY'); // September 12th 2018
 });
-
+// Fire
+window.Fire = new Vue();
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -51392,6 +51393,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     createUser: function createUser() {
       this.$Progress.start();
       this.form.post('api/user');
+      // Fire
+      Fire.$emit('afterCreateUser');
 
       $('#addNewUser').modal('hide');
 
@@ -51403,7 +51406,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   created: function created() {
+    var _this2 = this;
+
     this.loadUsers();
+    Fire.$on('afterCreateUser', function () {
+      _this2.loadUsers();
+    });
+    // setInterval(()=>this.loadUsers(),3000);
   }
   // mounted() {
   //     console.log('Component mounted.')
@@ -51785,7 +51794,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("td", [
       _c("a", { attrs: { href: "#" } }, [
-        _c("i", { staticClass: "fa fa-edit yellow" })
+        _c("i", { staticClass: "fa fa-edit indigo" })
       ]),
       _vm._v("\n                /\n                "),
       _c("a", { attrs: { href: "#" } }, [

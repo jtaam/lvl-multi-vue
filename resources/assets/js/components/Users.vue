@@ -30,7 +30,7 @@
                   <td>{{user.created_at|userCreateDate}}</td>
                   <td>
                     <a href="#">
-                      <i class="fa fa-edit yellow"></i>
+                      <i class="fa fa-edit indigo"></i>
                     </a>
                     /
                     <a href="#">
@@ -130,6 +130,8 @@
         createUser(){
           this.$Progress.start();
           this.form.post('api/user');
+          // Fire
+          Fire.$emit('afterCreateUser');
 
           $('#addNewUser').modal('hide');
 
@@ -142,6 +144,10 @@
       },
       created(){
         this.loadUsers();
+        Fire.$on('afterCreateUser',()=>{
+          this.loadUsers();
+        });
+        // setInterval(()=>this.loadUsers(),3000);
       }
       // mounted() {
       //     console.log('Component mounted.')

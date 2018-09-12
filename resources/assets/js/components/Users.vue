@@ -33,7 +33,7 @@
                       <i class="fa fa-edit indigo"></i>
                     </a>
                     /
-                    <a href="#">
+                    <a href="#" @click="deleteUser(user.id)">
                       <i class="fa fa-trash red"></i>
                     </a>
                   </td>
@@ -145,7 +145,32 @@
             })
             .catch(()=>{
 
-            })          
+            })
+        },
+        deleteUser(id){
+          swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            // Send ajax request to the server to delete
+            if (result.value) {
+              this.form.delete('api/user/'+id).then(()=>{
+                  swal(
+                    'Deleted!',
+                    'Your user has been deleted.',
+                    'success'
+                  )
+                  Fire.$emit('afterCreateUser');
+                }).catch(()=>{
+                  swal("Failed!","There was something wrong.","warning");
+                });
+              }
+          })
         }
       },
       created(){

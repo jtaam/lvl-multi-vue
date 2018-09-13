@@ -7,7 +7,7 @@
               <h3 class="card-title">Users Table</h3>
 
               <div class="card-tools">
-                <button type="button" name="button" class="btn btn-success" data-toggle="modal" data-target="#addNewUser">Add New <i class="fas fa-user-plus fa-fw"></i></button>
+                <button type="button" name="button" class="btn btn-success" @click="newModal">Add New <i class="fas fa-user-plus fa-fw"></i></button>
               </div>
             </div>
             <!-- /.card-header -->
@@ -29,7 +29,7 @@
                   <td><span class="tag tag-success">{{user.type|capText}}</span></td>
                   <td>{{user.created_at|userCreateDate}}</td>
                   <td>
-                    <a href="#">
+                    <a href="#" @click="editModal(user)">
                       <i class="fa fa-edit indigo"></i>
                     </a>
                     /
@@ -124,6 +124,15 @@
         }
       },
       methods:{
+        editModal(user){
+          this.form.reset();
+          $('#addNewUser').modal('show');
+          this.form.fill(user);
+        },
+        newModal(){
+          this.form.reset();
+          $('#addNewUser').modal('show');
+        },
         loadUsers(){
           axios.get('api/user').then(({data})=>(this.users=data.data)); // function({data})
         },

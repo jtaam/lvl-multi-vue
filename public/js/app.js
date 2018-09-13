@@ -71715,6 +71715,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       editmode: false,
       users: {},
       form: new Form({
+        id: '',
         name: '',
         email: '',
         password: '',
@@ -71727,7 +71728,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     updateUser: function updateUser() {
+      var _this = this;
+
+      this.$Progress.start();
       console.log('editing data');
+      this.form.put('api/user/' + this.form.id).then(function () {
+        $('#addNewUser').modal('hide');
+        swal('Updated!', 'Information has been updated.', 'success');
+        _this.$Progress.finish();
+        Fire.$emit('afterCreateUser');
+      }).catch(function () {
+        _this.$Progress.fail();
+      });
     },
     editModal: function editModal(user) {
       this.editmode = true;
@@ -71741,15 +71753,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       $('#addNewUser').modal('show');
     },
     loadUsers: function loadUsers() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get('api/user').then(function (_ref) {
         var data = _ref.data;
-        return _this.users = data.data;
+        return _this2.users = data.data;
       }); // function({data})
     },
     createUser: function createUser() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.$Progress.start();
 
@@ -71763,11 +71775,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           type: 'success',
           title: 'User created successfully'
         });
-        _this2.$Progress.finish();
+        _this3.$Progress.finish();
       }).catch(function () {});
     },
     deleteUser: function deleteUser(id) {
-      var _this3 = this;
+      var _this4 = this;
 
       swal({
         title: 'Are you sure?',
@@ -71780,7 +71792,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).then(function (result) {
         // Send ajax request to the server to delete
         if (result.value) {
-          _this3.form.delete('api/user/' + id).then(function () {
+          _this4.form.delete('api/user/' + id).then(function () {
             swal('Deleted!', 'Your user has been deleted.', 'success');
             Fire.$emit('afterCreateUser');
           }).catch(function () {
@@ -71791,11 +71803,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this5 = this;
 
     this.loadUsers();
     Fire.$on('afterCreateUser', function () {
-      _this4.loadUsers();
+      _this5.loadUsers();
     });
     // setInterval(()=>this.loadUsers(),3000);
   }

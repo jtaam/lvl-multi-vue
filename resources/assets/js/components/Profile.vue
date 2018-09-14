@@ -17,7 +17,7 @@
                   <h5 class="widget-user-desc">Web Designer</h5>
                 </div>
                 <div class="widget-user-image">
-                  <img class="img-circle" src="https://adminlte.io/themes/dev/AdminLTE/dist/img/user3-128x128.jpg" alt="User Avatar">
+                  <img class="img-circle" src="" alt="User Avatar">
                 </div>
                 <div class="card-footer">
                   <div class="row">
@@ -199,7 +199,7 @@
                           <label for="inputBio" class="col-sm-2 control-label">Bio</label>
 
                           <div class="col-sm-10">
-                            <textarea class="form-control" id="inputBio" placeholder="Bio"></textarea>
+                            <textarea v-model="form.bio" class="form-control" id="inputBio" placeholder="Bio"></textarea>
                           </div>
                         </div>
 
@@ -207,7 +207,7 @@
                           <label for="profilePhoto" class="col-sm-2 control-label">Profile Photo</label>
 
                           <div class="col-sm-10">
-                            <input type="file" name="profilePhoto" id="profilePhoto">
+                            <input type="file" @change="updateProfile" name="profilePhoto" id="profilePhoto" class="form-input">
                           </div>
                         </div>
 
@@ -230,7 +230,7 @@
                         </div>
                         <div class="form-group">
                           <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-danger">Submit</button>
+                            <button type="submit" @click.prevent="updateInfo" class="btn btn-success">Update</button>
                           </div>
                         </div>
                       </form>
@@ -261,6 +261,30 @@
             bio:'',
             photo:''
           })
+        }
+      },
+      methods:{
+        updateProfile(e){
+          let file = e.target.files[0];
+
+          console.log(file);
+
+          let reader = new FileReader();
+
+          reader.onloadend = (file) => {
+            // console.log('RESULT', reader.result);
+            this.form.photo = reader.result;
+          }
+          reader.readAsDataURL(file);
+        },
+        updateInfo(){
+          this.form.put('api/profile/')
+            .then(()=>{
+
+            })
+            .catch(()=>{
+
+            });
         }
       },
       mounted() {

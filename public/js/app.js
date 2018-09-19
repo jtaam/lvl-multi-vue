@@ -72115,113 +72115,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -72247,26 +72140,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       console.log(file);
 
       var reader = new FileReader();
-
-      reader.onloadend = function (file) {
-        // console.log('RESULT', reader.result);
-        _this.form.photo = reader.result;
-      };
-      reader.readAsDataURL(file);
+      if (file['size'] < 2111775) {
+        // if (file['size'] > 703925) {
+        reader.onloadend = function (file) {
+          // console.log('RESULT', reader.result);
+          _this.form.photo = reader.result;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        swal({
+          type: 'error',
+          title: 'Oops...',
+          text: 'You are uploading a large file.'
+        });
+      }
     },
     updateInfo: function updateInfo() {
-      this.form.put('api/profile/').then(function () {}).catch(function () {});
+      var _this2 = this;
+
+      this.$Progress.start();
+      this.form.put('api/profile/').then(function () {
+
+        _this2.$Progress.finish();
+      }).catch(function () {
+        _this2.$Progress.fail();
+      });
     }
   },
   mounted: function mounted() {
     console.log('Component mounted.');
   },
   created: function created() {
-    var _this2 = this;
+    var _this3 = this;
 
     axios.get('api/profile').then(function (_ref) {
       var data = _ref.data;
-      return _this2.form.fill(data);
+      return _this3.form.fill(data);
     });
   }
 });
@@ -72289,7 +72198,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
             _c("div", { staticClass: "tab-content" }, [
-              _vm._m(2),
+              _c("div", { staticClass: "tab-pane", attrs: { id: "activity" } }),
               _vm._v(" "),
               _c(
                 "div",
@@ -72435,7 +72344,49 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _vm._m(3),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-12 control-label",
+                          attrs: { for: "password" }
+                        },
+                        [_vm._v("Password (leave empty if not changing)")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-10" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.password,
+                              expression: "form.password"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "password",
+                            id: "password",
+                            placeholder: "Password",
+                            autocomplete: "off"
+                          },
+                          domProps: { value: _vm.form.password },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "password",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-group" }, [
                       _c("div", { staticClass: "col-sm-offset-2 col-sm-10" }, [
@@ -72565,256 +72516,6 @@ var staticRenderFns = [
             [_vm._v("Settings")]
           )
         ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "tab-pane", attrs: { id: "activity" } }, [
-      _c("div", { staticClass: "post" }, [
-        _c("div", { staticClass: "user-block" }, [
-          _c("img", {
-            staticClass: "img-circle img-bordered-sm",
-            attrs: {
-              src:
-                "https://adminlte.io/themes/dev/AdminLTE/dist/img/user1-128x128.jpg",
-              alt: "user image"
-            }
-          }),
-          _vm._v(" "),
-          _c("span", { staticClass: "username" }, [
-            _c("a", { attrs: { href: "#" } }, [_vm._v("Jonathan Burke Jr.")]),
-            _vm._v(" "),
-            _c(
-              "a",
-              { staticClass: "float-right btn-tool", attrs: { href: "#" } },
-              [_c("i", { staticClass: "fa fa-times" })]
-            )
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "description" }, [
-            _vm._v("Shared publicly - 7:30 PM today")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "\n                      Lorem ipsum represents a long-held tradition for designers,\n                      typographers and the like. Some people hate it and argue for\n                      its demise, but others ignore the hate as they create awesome\n                      tools to help create filler text for everyone from bacon lovers\n                      to Charlie Sheen fans.\n                    "
-          )
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _c(
-            "a",
-            { staticClass: "link-black text-sm mr-2", attrs: { href: "#" } },
-            [_c("i", { staticClass: "fa fa-share mr-1" }), _vm._v(" Share")]
-          ),
-          _vm._v(" "),
-          _c("a", { staticClass: "link-black text-sm", attrs: { href: "#" } }, [
-            _c("i", { staticClass: "fa fa-thumbs-o-up mr-1" }),
-            _vm._v(" Like")
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "float-right" }, [
-            _c(
-              "a",
-              { staticClass: "link-black text-sm", attrs: { href: "#" } },
-              [
-                _c("i", { staticClass: "fa fa-comments-o mr-1" }),
-                _vm._v(" Comments (5)\n                        ")
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control form-control-sm",
-          attrs: { type: "text", placeholder: "Type a comment" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "post clearfix" }, [
-        _c("div", { staticClass: "user-block" }, [
-          _c("img", {
-            staticClass: "img-circle img-bordered-sm",
-            attrs: {
-              src:
-                "https://adminlte.io/themes/dev/AdminLTE/dist/img/user7-128x128.jpg",
-              alt: "User Image"
-            }
-          }),
-          _vm._v(" "),
-          _c("span", { staticClass: "username" }, [
-            _c("a", { attrs: { href: "#" } }, [_vm._v("Sarah Ross")]),
-            _vm._v(" "),
-            _c(
-              "a",
-              { staticClass: "float-right btn-tool", attrs: { href: "#" } },
-              [_c("i", { staticClass: "fa fa-times" })]
-            )
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "description" }, [
-            _vm._v("Sent you a message - 3 days ago")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "\n                      Lorem ipsum represents a long-held tradition for designers,\n                      typographers and the like. Some people hate it and argue for\n                      its demise, but others ignore the hate as they create awesome\n                      tools to help create filler text for everyone from bacon lovers\n                      to Charlie Sheen fans.\n                    "
-          )
-        ]),
-        _vm._v(" "),
-        _c("form", { staticClass: "form-horizontal" }, [
-          _c("div", { staticClass: "input-group input-group-sm mb-0" }, [
-            _c("input", {
-              staticClass: "form-control form-control-sm",
-              attrs: { placeholder: "Response" }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c(
-                "button",
-                { staticClass: "btn btn-danger", attrs: { type: "submit" } },
-                [_vm._v("Send")]
-              )
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "post" }, [
-        _c("div", { staticClass: "user-block" }, [
-          _c("img", {
-            staticClass: "img-circle img-bordered-sm",
-            attrs: {
-              src:
-                "https://adminlte.io/themes/dev/AdminLTE/dist/img/user6-128x128.jpg",
-              alt: "User Image"
-            }
-          }),
-          _vm._v(" "),
-          _c("span", { staticClass: "username" }, [
-            _c("a", { attrs: { href: "#" } }, [_vm._v("Adam Jones")]),
-            _vm._v(" "),
-            _c(
-              "a",
-              { staticClass: "float-right btn-tool", attrs: { href: "#" } },
-              [_c("i", { staticClass: "fa fa-times" })]
-            )
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "description" }, [
-            _vm._v("Posted 5 photos - 5 days ago")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row mb-3" }, [
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("img", {
-              staticClass: "img-fluid",
-              attrs: {
-                src:
-                  "https://adminlte.io/themes/dev/AdminLTE/dist/img/photo1.png",
-                alt: "Photo"
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-sm-6" }, [
-                _c("img", {
-                  staticClass: "img-fluid mb-3",
-                  attrs: {
-                    src:
-                      "https://adminlte.io/themes/dev/AdminLTE/dist/img/photo2.png",
-                    alt: "Photo"
-                  }
-                }),
-                _vm._v(" "),
-                _c("img", {
-                  staticClass: "img-fluid",
-                  attrs: {
-                    src:
-                      "https://adminlte.io/themes/dev/AdminLTE/dist/img/photo3.jpg",
-                    alt: "Photo"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-6" }, [
-                _c("img", {
-                  staticClass: "img-fluid mb-3",
-                  attrs: {
-                    src:
-                      "https://adminlte.io/themes/dev/AdminLTE/dist/img/photo4.jpg",
-                    alt: "Photo"
-                  }
-                }),
-                _vm._v(" "),
-                _c("img", {
-                  staticClass: "img-fluid",
-                  attrs: {
-                    src:
-                      "https://adminlte.io/themes/dev/AdminLTE/dist/img/photo1.png",
-                    alt: "Photo"
-                  }
-                })
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _c(
-            "a",
-            { staticClass: "link-black text-sm mr-2", attrs: { href: "#" } },
-            [_c("i", { staticClass: "fa fa-share mr-1" }), _vm._v(" Share")]
-          ),
-          _vm._v(" "),
-          _c("a", { staticClass: "link-black text-sm", attrs: { href: "#" } }, [
-            _c("i", { staticClass: "fa fa-thumbs-o-up mr-1" }),
-            _vm._v(" Like")
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "float-right" }, [
-            _c(
-              "a",
-              { staticClass: "link-black text-sm", attrs: { href: "#" } },
-              [
-                _c("i", { staticClass: "fa fa-comments-o mr-1" }),
-                _vm._v(" Comments (5)\n                        ")
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control form-control-sm",
-          attrs: { type: "text", placeholder: "Type a comment" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c(
-        "label",
-        { staticClass: "col-sm-12 control-label", attrs: { for: "password" } },
-        [_vm._v("Password (leave empty if not changing)")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-10" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "password", id: "password", placeholder: "Password" }
-        })
       ])
     ])
   }
